@@ -1,0 +1,102 @@
+<app-navbar></app-navbar>
+<div class="card">
+  <h2 class="mb-5 titulo">PAINEL</h2>
+
+  <p-table
+    #dt
+    #textInput
+    [value]="users"
+    responsiveLayout="stack"
+    [rows]="5"
+    [paginator]="true"
+    [globalFilterFields]="['nome', 'email']"
+    dataKey="id"
+    currentPageReportTemplate="Mostrando do {first} ao {last} de {totalRecords} Itens"
+    [showCurrentPageReport]="true"
+  >
+    <ng-template pTemplate="caption">
+      <div class="flex align-items-center justify-content-between">
+        <span class="p-input-icon-left">
+          <i class="pi pi-search"></i>
+          <input
+            pInputText
+            class="input_pesquisa"
+            type="text"
+            pTooltip="Nome ou Email"
+            tooltipPosition="top"
+            (input)="applyFilterGlobal($event, 'contains')"
+            placeholder="Procurar... "
+          />
+        </span>
+        <div>
+          <button
+          pButton
+          pRipple
+          pTooltip="Nome ou Email"
+          icon="pi pi-plus"
+          class="botao_novo p-button-primary"
+          (click)="openNewUserDialog()"
+        >
+          <span *ngIf="showLabel">NOVO</span>
+        </button>
+        </div>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header" let-columns>
+      <tr>
+        <th>Nome</th>
+        <th>Sobrenome</th>
+        <th>Email</th>
+        <th>Nível de Acesso</th>
+        <th>Ações</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-usuario let-columns="columns">
+      <tr>
+        <td>
+          <span class="p-column-title">Nome</span>
+          {{ usuario.nome | uppercase }}
+        </td>
+        <td>
+          <span class="p-column-title">Sobrenome</span>
+          {{ usuario.sobrenome | uppercase }}
+        </td>
+        <td>
+          <span class="p-column-title">Email</span>
+          {{ usuario.email | uppercase }}
+        </td>
+        <td>
+          <span class="p-column-title">Nível de Acesso</span>
+          {{ usuario.nivel_acesso | uppercase }}
+        </td>
+        <td>
+          <p-button
+            icon="pi pi-user-edit"
+            styleClass="p-button-rounded p-button-primary p-button-text"
+            (onClick)="openEditUserDialog(usuario)"
+          ></p-button>
+          <p-button
+            icon="pi pi-trash"
+            styleClass="p-button-rounded p-button-primary p-button-text"
+            (onClick)="openDeletePopup($event)"
+          ></p-button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+
+
+
+<app-new-user-dialog
+#newUserDialog
+[userDialog]="userDialog"
+(dialogClosed)="onDialogClosed()"
+[saveMode]="saveMode"
+[editMode]="editMode"
+>
+</app-new-user-dialog>
+
+
+<p-toast></p-toast>
+<p-confirmDialog></p-confirmDialog>
