@@ -38,11 +38,11 @@ export class NewUserDialogComponent implements OnInit{
       this.nivel_acesso = [
         { 
           id:1,
-          nvl_acesso: "ADMIN"
+          nvl_acesso: "Admin"
         },
         {
           id:2,
-          nvl_acesso: "USUARIO"
+          nvl_acesso: "Usuario"
         }
       ]
   }
@@ -132,14 +132,14 @@ export class NewUserDialogComponent implements OnInit{
   }
 
   editUserDialog(user:any){
-    const { nome, sobrenome, email, nivel_acesso , senha , id} = user;
+    const { nome, sobrenome, email, nivel_Acesso , senha , id} = user;
 
     this.idUsuario = id
     this.userFormDialog.get('nome')?.setValue(nome);
     this.userFormDialog.get('sobrenome')?.setValue(sobrenome);
     this.userFormDialog.get('email')?.setValue(email);
     
-    const a = this.nivel_acesso.find((item:any) => item.nivel_cesso == nivel_acesso)
+    const a = this.nivel_acesso.find((item:any) => item.nvl_acesso == nivel_Acesso)
     this.slected_nivel_acesso = a
 
     this.userFormDialog.get('senha')?.setValue(senha);

@@ -32,7 +32,6 @@
           <button
           pButton
           pRipple
-          pTooltip="Nome ou Email"
           icon="pi pi-plus"
           class="botao_novo p-button-primary"
           (click)="openNewUserDialog()"
@@ -72,7 +71,7 @@
         </td>
         <td>
           <span class="p-column-title">Nível de Acesso</span>
-          {{ usuario.nivel_Acesso | uppercase }}
+          {{ usuario.nivel_Acesso == "Admin" ? "ADMIN" : "USUÁRIO COMUM" }}
         </td>
         <td>
           <p-button
