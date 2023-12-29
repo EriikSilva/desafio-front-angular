@@ -1,0 +1,26 @@
+<p-toolbar>
+    <div class="p-toolbar-group-start">
+        Desafio INDT
+    </div>
+    <div class="p-toolbar-group-center centro">
+        <h4>Painel de Controle</h4>
+    </div>
+    <div class="p-toolbar-group-end">
+        <div class="mr-3">
+            <button
+              #btn
+              type="button"
+              pButton
+              icon="pi pi-user"
+              (click)="menu.toggle($event)"
+            ></button>
+            <p-slideMenu
+              #menu
+              [model]="items"
+              [popup]="true"
+              [viewportHeight]="145"
+              [style]="{ 'min-width': '175px' }"
+            ></p-slideMenu>
+          </div>
+    </div>
+</p-toolbar>
