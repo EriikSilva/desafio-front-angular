@@ -59,6 +59,23 @@ export class HomeComponent implements OnInit{
     })
   }
 
+  deleteUsuarios(id:any){
+    this.crudService.deleteUsuarios(id)
+    .subscribe({
+      next:(res:any) => {
+        const { mensagem } = res
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Sucesso ao Remover',
+          detail: mensagem
+        }); 
+      this.getUsuarios();
+      }, error:(res:any) =>{
+        console.log('res', res)
+      }
+    })
+  }
+
   openNewUserDialog(){
     this.NewUserDialog?.resetForm();
     this.saveMode = true;
@@ -73,7 +90,8 @@ export class HomeComponent implements OnInit{
     this.NewUserDialog?.editUserDialog(user)
   }
 
-  openDeletePopup(event:any){
+  openDeletePopup(event:any, usuario:any){
+    const { id } = usuario
     this.confirmationService.confirm({
       target: event.target as EventTarget,
       message: 'Deseja Deletar Este Usuário?',
@@ -83,12 +101,15 @@ export class HomeComponent implements OnInit{
       acceptLabel:"SIM",
       rejectButtonStyleClass:"p-button-text",
       accept: () => {
+     
+        this.deleteUsuarios(id);
       },
       reject: () => {
          
       }
   });
   }
+  
   
   onDialogClosed(){
     this.userDialog = false;

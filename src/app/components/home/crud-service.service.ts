@@ -23,4 +23,8 @@ export class CrudService {
   editUsuarios(body:any):Observable<any>{
     return this.http.put(`${this.apiUrl}/Usuario`, body)
   }
+
+  deleteUsuarios(id:any):Observable<any>{
+    return this.http.delete(`${this.apiUrl}/Usuario?id=${id}`)
+  }
 }
