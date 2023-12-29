@@ -13,6 +13,10 @@ export class CrudService {
   constructor(private http:HttpClient) { }
 
   getUsuarios():Observable<any>{
-    return this.http.get(`${this.apiUrl}/Usuario`)
+    return this.http.get(`${this.apiUrl}/Usuario`);
+  }
+
+  postUsuarios(body:any):Observable<any>{
+    return this.http.post(`${this.apiUrl}/Usuario`, body);
   }
 }
