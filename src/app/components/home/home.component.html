@@ -44,6 +44,7 @@
     </ng-template>
     <ng-template pTemplate="header" let-columns>
       <tr>
+        <th>ID</th>
         <th>Nome</th>
         <th>Sobrenome</th>
         <th>Email</th>
@@ -53,6 +54,10 @@
     </ng-template>
     <ng-template pTemplate="body" let-usuario let-columns="columns">
       <tr>
+        <td>
+          <span class="p-column-title">ID</span>
+          {{ usuario.id }}
+        </td>
         <td>
           <span class="p-column-title">Nome</span>
           {{ usuario.nome | uppercase }}
@@ -92,6 +97,7 @@
 #newUserDialog
 [userDialog]="userDialog"
 (dialogClosed)="onDialogClosed()"
+(getUsuarios)="getUsuarios()"
 [saveMode]="saveMode"
 [editMode]="editMode"
 >
