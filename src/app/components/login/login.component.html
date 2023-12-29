@@ -1,0 +1,98 @@
+<div class="login-container">
+  <div class="image-container"></div>
+  <div class="form-container">
+    <div class="flex-grow-1 flex justify-content-center border-round">
+      <div class="tab_formatation">
+        <p-tabView>
+          <p-tabPanel header="Faça seu Login">
+            <form>
+              <div class="flex align-items-center m-2">
+                <div class="card_setup">
+                  <span class="p-float-label">
+                    <input
+                      [style]="{ width: '100%' }"
+                      type="text"
+                      pInputText
+                      id="emailInputLogin"
+                    />
+                    <label htmlFor="emailInputLogin">Email: </label>
+                  </span>
+                  <p-divider />
+                  <span class="p-float-label">
+                    <p-password
+                      [inputStyle]="{ width: '100%' }"
+                      [toggleMask]="true"
+                      id="passwordInput"
+                      [feedback]="false"
+                    />
+                    <label class="input" htmlFor="passwordInput">Senha: </label>
+                  </span>
+                  <p-divider/>
+                  <button
+                  label="Login" 
+                  pButton 
+                  class="botao_submit"
+                  routerLink="/home"
+                  (click)="doLogin()"
+                  ></button>
+                </div>
+              </div>
+            </form>
+          </p-tabPanel>
+          <p-tabPanel header="Cadastro de Usuários">
+            <div class="flex align-items-center m-2">
+              <div class="card_setup">
+                <span class="p-float-label">
+                  <input
+                    [style]="{ width: '100%' }"
+                    type="text"
+                    pInputText
+                    id="nameInput"
+                    aria-describedby="username-help"
+                  />
+                  <label htmlFor="nameInput">Nome:</label>
+                </span>
+                <p-divider></p-divider>
+                <span class="p-float-label">
+                  <input
+                    [style]="{ width: '100%' }"
+                    type="text"
+                    pInputText
+                    id="sobrenomeInput"
+                    aria-describedby="username-help"
+                  />
+                  <label htmlFor="sobrenomeInput">Sobrenome:</label>
+                </span>
+                <p-divider/>
+                <span class="p-float-label">
+                  <input
+                    [style]="{ width: '100%' }"
+                    pInputText
+                    id="username"
+                    id="emailInput"
+                    aria-describedby="email-help"
+                  />
+                  <label htmlFor="emailInput">Email:</label>
+                </span>
+
+                <p-divider/>
+                <span class="p-float-label">
+                  <p-password
+                    [style]="{ width: '100%' }"
+                    [inputStyle]="{ width: '100%' }"
+                    [toggleMask]="true"
+                    id="passwordInput"
+                    [feedback]="false"
+                  />
+                  <label htmlFor="passwordInput">Senha:</label>
+                </span>
+                <p-divider/>
+                <button label="Salvar" pButton class="botao_submit"></button>
+              </div>
+            </div>
+          </p-tabPanel>
+        </p-tabView>
+      </div>
+    </div>
+  </div>
+</div>

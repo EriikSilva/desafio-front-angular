@@ -1,0 +1,42 @@
+.login-container {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+  }
+  
+  .image-container {
+    background: url('https://via.placeholder.com/1080');
+    background-size: cover;
+    flex: 1;
+  }
+  
+  .form-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+ 
+
+  .card_setup {
+    margin-top: 30px;
+    margin-left: 20px;
+  }
+  
+  .tab_formatation{
+    max-width: 55vh;
+  }
+
+  .botao_submit{
+    width: 100%;
+    margin-top: 0.6rem;
+  }
+  
+
+  
+  @media (max-width: 1300px) {
+    .image-container{
+      display: none;
+    }
+  }
