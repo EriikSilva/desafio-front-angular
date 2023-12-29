@@ -3,6 +3,7 @@ import { Table } from 'primeng/table';
 import { NewUserDialogComponent } from './dialogs/new-user-dialog/new-user-dialog.component';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { CrudService } from './crud-service.service';
+import { MensagemRetorno, UsuarioDTO } from './DTO/crudDTO';
 
 
 interface User {
@@ -37,22 +38,19 @@ export class HomeComponent implements OnInit{
     this.updateLabelVisibility();
   }
 
-
   updateLabelVisibility(): void {
     this.showLabel = window.innerWidth > 519;
   }
   
-  
   ngOnInit(): void {
     this.updateLabelVisibility();
-
     this.getUsuarios();
   }
 
   getUsuarios(){
     this.crudService.getUsuarios()
     .subscribe({
-      next: (res:any) => {
+      next: (res:MensagemRetorno) => {
         const { dados } = res
         this.users = dados;
       }
@@ -83,14 +81,14 @@ export class HomeComponent implements OnInit{
     this.userDialog = true
   }
 
-  openEditUserDialog(user:any){
+  openEditUserDialog(user:UsuarioDTO){
     this.editMode = true;
     this.saveMode = false;
     this.userDialog = true;
     this.NewUserDialog?.editUserDialog(user)
   }
 
-  openDeletePopup(event:any, usuario:any){
+  openDeletePopup(event:any, usuario:UsuarioDTO){
     const { id } = usuario
     this.confirmationService.confirm({
       target: event.target as EventTarget,
@@ -101,7 +99,6 @@ export class HomeComponent implements OnInit{
       acceptLabel:"SIM",
       rejectButtonStyleClass:"p-button-text",
       accept: () => {
-     
         this.deleteUsuarios(id);
       },
       reject: () => {
@@ -109,7 +106,6 @@ export class HomeComponent implements OnInit{
       }
   });
   }
-  
   
   onDialogClosed(){
     this.userDialog = false;

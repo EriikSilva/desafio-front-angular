@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { CrudService } from '../../crud-service.service';
 import { MessageService } from 'primeng/api';
+import { PostUserDTO, PutUserDTO } from '../../DTO/crudDTO';
 
 @Component({
   selector: 'app-new-user-dialog',
@@ -60,7 +61,7 @@ export class NewUserDialogComponent implements OnInit{
     const a = Object(formValue.nivel_acesso)
     const { nvl_acesso } = a
     
-    const body = {
+    const body:PostUserDTO = {
       nome, 
       sobrenome,
       email,
@@ -98,7 +99,7 @@ export class NewUserDialogComponent implements OnInit{
     const { nvl_acesso } = a
     const id = this.idUsuario;
     
-    const body = {
+    const body:PutUserDTO = {
       id,
       nome, 
       sobrenome,
@@ -134,7 +135,6 @@ export class NewUserDialogComponent implements OnInit{
     const { nome, sobrenome, email, nivel_acesso , senha , id} = user;
 
     this.idUsuario = id
-
     this.userFormDialog.get('nome')?.setValue(nome);
     this.userFormDialog.get('sobrenome')?.setValue(sobrenome);
     this.userFormDialog.get('email')?.setValue(email);
@@ -143,12 +143,10 @@ export class NewUserDialogComponent implements OnInit{
     this.slected_nivel_acesso = a
 
     this.userFormDialog.get('senha')?.setValue(senha);
-
   }
 
   resetForm(){
     this.userFormDialog.reset();
     this.slected_nivel_acesso = ""
   }
-  
 }
