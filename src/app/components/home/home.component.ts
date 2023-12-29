@@ -2,6 +2,7 @@ import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { Table } from 'primeng/table';
 import { NewUserDialogComponent } from './dialogs/new-user-dialog/new-user-dialog.component';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { CrudService } from './crud-service.service';
 
 
 interface User {
@@ -19,7 +20,7 @@ interface User {
 })
 export class HomeComponent implements OnInit{
 
-  constructor(private confirmationService: ConfirmationService, private messageService: MessageService) {}
+  constructor(private confirmationService: ConfirmationService, private messageService: MessageService, private crudService:CrudService) {}
 
   @ViewChild('dt') dt: Table | undefined;
   @ViewChild('newUserDialog') NewUserDialog: NewUserDialogComponent | undefined;
@@ -45,22 +46,17 @@ export class HomeComponent implements OnInit{
   ngOnInit(): void {
     this.updateLabelVisibility();
 
-      this.users = [
-        {
-          id:1,
-          nome:'erik',
-          sobrenome: 'felipe',
-          email:'erik@teste.com',
-          nivel_acesso: "ADMIN"
-        },
-        {
-          id:2,
-          nome:'brennon',
-          sobrenome: 'junio',
-          email:'brennon@teste.com',
-          nivel_acesso: "USUARIO"
-        },
-      ]
+    this.getUsuarios();
+  }
+
+  getUsuarios(){
+    this.crudService.getUsuarios()
+    .subscribe({
+      next: (res:any) => {
+        const { dados } = res
+        this.users = dados;
+      }
+    })
   }
 
   openNewUserDialog(){
