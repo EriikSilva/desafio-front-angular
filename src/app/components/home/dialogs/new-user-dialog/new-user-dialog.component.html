@@ -1,0 +1,89 @@
+<p-dialog
+  [(visible)]="userDialog"
+  [style]="{ width: '450px' }"
+  (onHide)="closeDialog()"
+  [header]="saveMode ? 'Novo Usuário' : editMode ? 'Editar Usuário' : ''"
+  styleClass="p-fluid"
+  [modal]="true"
+  [draggable]="false"
+>
+  <ng-template pTemplate="content">
+    <form [formGroup]="userFormDialog">
+
+      <div class="field">
+        <label for="nivel_acesso">Nível de Acesso:</label>
+        <span> * </span>
+        <p-dropdown
+        id="nivel_acesso"
+        [options]="nivel_acesso"
+        formControlName="nivel_acesso"
+        placeholder="Selecione"
+        optionLabel="nivel_acesso"
+        (onChange)="onDropdownChangeUser($event)" 
+        [(ngModel)]="slected_nivel_acesso"
+        >
+        </p-dropdown>
+      </div>
+
+      <div class="field">
+        <label for="nome">Nome:</label>
+        <span> * </span>
+        <input
+          type="text"
+          formControlName="nome"
+          pInputText
+          maxlength="50"
+          id="nome"
+          required
+          autofocus
+        />
+      </div>
+      <div class="field">
+        <label for="sobrenome">Sobrenome:</label>
+        <span> * </span>
+        <input
+          type="text"
+          formControlName="sobrenome"
+          pInputText
+          maxlength="50"
+          id="sobrenome"
+          required
+          autofocus
+        />
+      </div>
+
+      <div class="field">
+        <label for="email">Email:</label>
+        <span> * </span>
+        <input
+          type="text"
+          formControlName="email"
+          pInputText
+          maxlength="50"
+          id="email"
+          required
+          autofocus
+        />
+      </div>
+
+
+    </form>
+  </ng-template>
+  <ng-template pTemplate="footer">
+    <button
+      pButton
+      pRipple
+      label="Cancelar"
+      class="p-button-text"
+      (click)="closeDialog()"
+    ></button>
+    <button
+
+    pButton
+    pRipple
+    label="Salvar"
+    class="p-button-text"
+    (click)="saveUser()"
+  ></button>
+  </ng-template>
+</p-dialog>
