@@ -18,7 +18,7 @@
         [options]="nivel_acesso"
         formControlName="nivel_acesso"
         placeholder="Selecione"
-        optionLabel="nivel_acesso"
+        optionLabel="nvl_acesso"
         (onChange)="onDropdownChangeUser($event)" 
         [(ngModel)]="slected_nivel_acesso"
         >
@@ -66,7 +66,18 @@
         />
       </div>
 
-
+      <div class="field">
+        <label for="senha">Senha:</label>
+        <span> * </span>
+        <p-password
+        [style]="{ width: '100%' }"
+        [inputStyle]="{ width: '100%' }"
+        [toggleMask]="true"
+        id="passwordInput"
+        formControlName="senha"
+        [feedback]="false"
+      />
+      </div>
     </form>
   </ng-template>
   <ng-template pTemplate="footer">
@@ -78,12 +89,24 @@
       (click)="closeDialog()"
     ></button>
     <button
-
+    *ngIf="saveMode"
     pButton
     pRipple
     label="Salvar"
     class="p-button-text"
     (click)="saveUser()"
   ></button>
+
+  <button
+  *ngIf="editMode"
+  pButton
+  pRipple
+  label="Editar"
+  class="p-button-text"
+  (click)="editUser()"
+></button>
   </ng-template>
 </p-dialog>
+
+
+<p-toast></p-toast>

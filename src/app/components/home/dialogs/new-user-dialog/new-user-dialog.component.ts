@@ -1,19 +1,26 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { CrudService } from '../../crud-service.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-new-user-dialog',
   templateUrl: './new-user-dialog.component.html',
-  styleUrls: ['./new-user-dialog.component.scss']
+  styleUrls: ['./new-user-dialog.component.scss'],
+  providers:[MessageService]
 })
 export class NewUserDialogComponent implements OnInit{
 
-  nivel_acesso:any;
+  constructor(private crudService:CrudService, private messageService:MessageService){}
+
+  nivel_acesso?:any;
   slected_nivel_acesso:any;
+  idUsuario: any;
 
   @Input() userDialog: boolean = false;
 
   @Output() dialogClosed = new EventEmitter<void>();
+  @Output() getUsuarios = new EventEmitter<void>();
   @Input() saveMode: boolean = false;
   @Input() editMode: boolean = false;
 
@@ -22,18 +29,19 @@ export class NewUserDialogComponent implements OnInit{
       nome: new FormControl('', Validators.required),
       sobrenome: new FormControl('', Validators.required),
       email: new FormControl('', Validators.required),
-      nivel_acesso: new FormControl('', Validators.required)
+      nivel_acesso: new FormControl('', Validators.required),
+      senha: new FormControl('', Validators.required)
   })
   
   ngOnInit(): void {
       this.nivel_acesso = [
         { 
           id:1,
-          nivel_acesso: "ADMIN"
+          nvl_acesso: "ADMIN"
         },
         {
           id:2,
-          nivel_acesso: "USUARIO"
+          nvl_acesso: "USUARIO"
         }
       ]
   }
@@ -44,7 +52,78 @@ export class NewUserDialogComponent implements OnInit{
   }
 
   saveUser(){
+    const formValue = this.userFormDialog.value;
+    const nome = String(formValue.nome);
+    const sobrenome = String(formValue.sobrenome);
+    const email = String(formValue.email);
+    const senha = String(formValue.senha)
+    const a = Object(formValue.nivel_acesso)
+    const { nvl_acesso } = a
+    
+    const body = {
+      nome, 
+      sobrenome,
+      email,
+      senha,
+      nivel_Acesso: nvl_acesso
+    }
 
+    this.crudService.postUsuarios(body)
+    .subscribe({
+      next:(res:any) => {
+        const { mensagem } = res
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Sucesso ao cadastrar',
+          detail: mensagem
+        });
+
+        this.getUsuarios.emit();
+        this.userFormDialog.reset();
+        this.closeDialog()
+      }, error:(res:any) => {
+        console.log(res)
+      }
+    })
+    
+  }
+
+  editUser(){
+    const formValue = this.userFormDialog.value;
+    const nome = String(formValue.nome);
+    const sobrenome = String(formValue.sobrenome);
+    const email = String(formValue.email);
+    const senha = String(formValue.senha)
+    const a = Object(formValue.nivel_acesso)
+    const { nvl_acesso } = a
+    const id = this.idUsuario;
+    
+    const body = {
+      id,
+      nome, 
+      sobrenome,
+      email,
+      senha,
+      nivel_Acesso: nvl_acesso
+    }
+
+    this.crudService.editUsuarios(body)
+    .subscribe({
+      next:(res:any) => {
+        const { mensagem } = res
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Sucesso ao Editar',
+          detail: mensagem
+        });
+
+        this.getUsuarios.emit();
+        this.userFormDialog.reset();
+        this.closeDialog()
+      }, error:(res:any) => {
+        console.log(res)
+      }
+    })
   }
 
   onDropdownChangeUser(event:any){
@@ -52,14 +131,18 @@ export class NewUserDialogComponent implements OnInit{
   }
 
   editUserDialog(user:any){
-    const { nome, sobrenome, email, nivel_acesso , id} = user;
+    const { nome, sobrenome, email, nivel_acesso , senha , id} = user;
+
+    this.idUsuario = id
 
     this.userFormDialog.get('nome')?.setValue(nome);
     this.userFormDialog.get('sobrenome')?.setValue(sobrenome);
     this.userFormDialog.get('email')?.setValue(email);
     
-    const a = this.nivel_acesso.find((item:any) => item.nivel_acesso == nivel_acesso)
+    const a = this.nivel_acesso.find((item:any) => item.nivel_cesso == nivel_acesso)
     this.slected_nivel_acesso = a
+
+    this.userFormDialog.get('senha')?.setValue(senha);
 
   }
 
