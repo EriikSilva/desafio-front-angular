@@ -19,4 +19,8 @@ export class CrudService {
   postUsuarios(body:any):Observable<any>{
     return this.http.post(`${this.apiUrl}/Usuario`, body);
   }
+
+  editUsuarios(body:any):Observable<any>{
+    return this.http.put(`${this.apiUrl}/Usuario`, body)
+  }
 }
