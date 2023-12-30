@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Table } from 'primeng/table';
 import { NewUserDialogComponent } from './dialogs/new-user-dialog/new-user-dialog.component';
 import { ConfirmationService, MessageService } from 'primeng/api';
@@ -33,17 +33,8 @@ export class HomeComponent implements OnInit{
   editMode: boolean = false;
   showLabel: boolean = true;
 
-  @HostListener('window:resize', ['$event'])
-  onResize(event: Event): void {
-    this.updateLabelVisibility();
-  }
-
-  updateLabelVisibility(): void {
-    this.showLabel = window.innerWidth > 519;
-  }
-  
+ 
   ngOnInit(): void {
-    this.updateLabelVisibility();
     this.getUsuarios();
   }
 
