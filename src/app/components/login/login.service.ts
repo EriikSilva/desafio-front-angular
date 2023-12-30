@@ -42,6 +42,19 @@ export class LoginService {
   }
 
 
+  setId(id:string){
+    return localStorage.setItem("idUser", id)
+  }
+
+  removeId(){
+    return localStorage.removeItem("idUser")
+  }
+
+  getId(){
+    return localStorage.getItem("idUser")
+  }
+
+
   
 
 }

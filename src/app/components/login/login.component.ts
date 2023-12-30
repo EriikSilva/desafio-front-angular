@@ -38,10 +38,11 @@ export class LoginComponent implements OnInit{
     this.loginService.doLogin(body)
     .subscribe({
       next:(res:any) => {
-        const { nome , nivel_Acesso} = res.user
+        const { nome , nivel_Acesso, id} = res.user
         
         this.loginService.setNome(nome);
         this.loginService.setNivelAcesso(nivel_Acesso);
+        this.loginService.setId(id);
 
         this.router.navigate(['/home']);
       }, error:(res:any) => {        
