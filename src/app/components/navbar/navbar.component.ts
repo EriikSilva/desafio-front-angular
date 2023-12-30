@@ -20,9 +20,11 @@ export class NavbarComponent implements OnInit{
   constructor( private router:Router, private loginService:LoginService){}
 
   items: MenuItem[] = [];
+  nmUsuario:any;
+  nvlAcesso:any;
 
   ngOnInit(): void {
-
+   this.getNmUsuario();
     this.items = [
       {
         label:'Perfil',
@@ -39,9 +41,15 @@ export class NavbarComponent implements OnInit{
     ]
   }
 
+  getNmUsuario(){
+   this.nmUsuario = this.loginService.getNome();
+   this.nvlAcesso = this.loginService.getNivelAcesso();
+  }
+
   logout(){
     this.loginService.removeNome();
     this.loginService.removeNivelAcesso();
+    this.loginService.removeId();
     this.router.navigate(['/'])
   }
 

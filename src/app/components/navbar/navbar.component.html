@@ -6,6 +6,11 @@
         <h4>Painel de Controle</h4>
     </div>
     <div class="p-toolbar-group-end">
+      <div class="usuarioContainer">
+        <div class="nmUsuario">Bem Vindo: {{nmUsuario | uppercase}}</div>
+        <span class="nivelAcesso"><span class="valorNivel">{{nvlAcesso == "Admin"? "Administrador" : "Usuário Comum"}}</span></span>
+      </div>
+      
         <div class="mr-3">
             <button
               #btn
