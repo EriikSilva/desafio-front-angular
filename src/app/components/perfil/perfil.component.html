@@ -1,0 +1,48 @@
+<div class="bg"> 
+    <div
+      class="flex justify-content-center align-items-stretch"
+      [style]="{ height: '100vh' }"
+    >
+      <p-card
+      styleClass="p-card-shadow"
+       
+        [style]="{
+          width: '50rem',
+          'margin-bottom': '1em',
+          'margin-right': 'auto',
+          'margin-left': '2rem',
+          'margin-top': '3em'
+        }"
+      > 
+      <button
+      type="button"
+      pButton
+      icon="pi pi-angle-left"
+      routerLink="/home"  
+      ></button>
+      <h1
+        style="display: inline;"
+        class="flex justify-content-center align-items-stretch">
+        Perfil</h1>
+
+        <div>
+          <img class="img_profile" src="/assets/img/profile_icon3.png">
+        </div>   
+
+        <p-divider></p-divider>
+      
+        <h3>Nome:
+             {{ nomeUser | titlecase }}
+        </h3>
+        <p-divider></p-divider>
+        <h3>Nível de Acesso:
+            {{ nvlAcesso | titlecase }}
+       </h3>
+        <ng-template pTemplate="sub-header">
+   
+        </ng-template>
+    
+        <p-divider></p-divider>
+      </p-card>
+    </div>
+    </div>

@@ -36,6 +36,7 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { MenubarModule } from 'primeng/menubar';
+import { PerfilComponent } from './components/perfil/perfil.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { MenubarModule } from 'primeng/menubar';
     LoginComponent,
     HomeComponent,
     NavbarComponent,
-    NewUserDialogComponent
+    NewUserDialogComponent,
+    PerfilComponent
   ],
   imports: [
     BrowserModule,
