@@ -1,3 +1,4 @@
+import { LoginService } from 'src/app/components/login/login.service';
 import { Component } from '@angular/core';
 
 @Component({
@@ -7,4 +8,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'desafio-front-indt';
+
+  constructor(private LoginService:LoginService){}
+
+  getId(){
+    return this.LoginService.getId();
+  }
 }

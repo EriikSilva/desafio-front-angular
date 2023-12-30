@@ -91,6 +91,8 @@ export class NewUserDialogComponent implements OnInit{
   }
 
   editUser(){
+    const nomeUsuario = this.loginService.getNome();
+
     const formValue = this.userFormDialog.value;
     const nome = String(formValue.nome);
     const sobrenome = String(formValue.sobrenome);
@@ -115,6 +117,11 @@ export class NewUserDialogComponent implements OnInit{
         if(nvl_acesso !== 'Admin'){
           this.loginService.setNivelAcesso(nvl_acesso)
         }
+
+        if(nome !== nomeUsuario){
+          this.loginService.setNome(nome);
+        }
+
         const { mensagem } = res
         this.messageService.add({
           severity: 'success',
