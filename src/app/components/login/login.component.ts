@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { LoginService } from './login.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -10,10 +10,14 @@ import { ConfirmationService, MessageService } from 'primeng/api';
   styleUrls: ['./login.component.scss'],
   providers: [ConfirmationService, MessageService]
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit{
 
   constructor(private loginService:LoginService, private router: Router, private confirmationService: ConfirmationService, private messageService: MessageService){}
 
+  ngOnInit(): void {
+      this.loginService.removeNome();
+      this.loginService.removeNivelAcesso();
+  }
 
   formLogin = new FormGroup({
     email : new FormControl("", Validators.required),
@@ -25,9 +29,7 @@ export class LoginComponent {
 
     const email = String(formValue.email);
     const senha = String(formValue.senha);
-
-    console.log('formValue', formValue)
-
+ 
     const body = {
       email,
       senha
