@@ -101,7 +101,8 @@ export class HomeComponent implements OnInit{
 
   openDeletePopup(event:any, usuario:UsuarioDTO){
     const { id } = usuario
-    const a = localStorage.getItem("NivelAcesso")
+    const a = localStorage.getItem("NivelAcesso");
+    const idUsuario = localStorage.getItem("idUser");
     if(a !== "Admin"){
       return this.messageService.add({
         severity: 'error',
@@ -119,6 +120,14 @@ export class HomeComponent implements OnInit{
       acceptLabel:"SIM",
       rejectButtonStyleClass:"p-button-text",
       accept: () => {
+        if(String(id) == idUsuario){
+          return this.messageService.add({
+            severity: 'error',
+            summary: 'Erro ao Excluir',
+            detail: "Você não pode se auto-excluir kkkkk"
+          });
+        }
+
         this.deleteUsuarios(id);
       },
       reject: () => {
