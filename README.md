@@ -11,6 +11,10 @@
 <br>
 - Front-end:angular com primeng e primeflex;
 
+- Backend => https://github.com/EriikSilva/desafio-back-indt
+
+### OBS: A Váriavel de ambiente ja está setada em https://localhost:7145/api (APS.NET)
+
 # 🐱‍👤Features
 - Toolbar (Navbar)
  -Logou  e Perfil
