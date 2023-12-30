@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { LoginService } from '../login/login.service';
 
 
 interface MenuItem {
@@ -16,7 +17,7 @@ interface MenuItem {
 })
 export class NavbarComponent implements OnInit{
 
-  constructor( private router:Router){}
+  constructor( private router:Router, private loginService:LoginService){}
 
   items: MenuItem[] = [];
 
@@ -39,6 +40,8 @@ export class NavbarComponent implements OnInit{
   }
 
   logout(){
+    this.loginService.removeNome();
+    this.loginService.removeNivelAcesso();
     this.router.navigate(['/'])
   }
 

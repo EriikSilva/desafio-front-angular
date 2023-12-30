@@ -5,7 +5,7 @@
       <div class="tab_formatation">
         <p-tabView>
           <p-tabPanel header="Faça seu Login">
-            <form>
+            <form [formGroup]="formLogin">
               <div class="flex align-items-center m-2">
                 <div class="card_setup">
                   <span class="p-float-label">
@@ -13,6 +13,7 @@
                       [style]="{ width: '100%' }"
                       type="text"
                       pInputText
+                      formControlName="email"
                       id="emailInputLogin"
                     />
                     <label htmlFor="emailInputLogin">Email: </label>
@@ -24,6 +25,7 @@
                       [toggleMask]="true"
                       id="passwordInput"
                       [feedback]="false"
+                      formControlName="senha"
                     />
                     <label class="input" htmlFor="passwordInput">Senha: </label>
                   </span>
@@ -32,7 +34,6 @@
                   label="Login" 
                   pButton 
                   class="botao_submit"
-                  routerLink="/home"
                   (click)="doLogin()"
                   ></button>
                 </div>
@@ -96,3 +97,6 @@
     </div>
   </div>
 </div>
+
+
+<p-toast></p-toast>
