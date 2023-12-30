@@ -66,6 +66,16 @@ export class HomeComponent implements OnInit{
   }
 
   openNewUserDialog(){
+    const a = localStorage.getItem("NivelAcesso");
+
+    if(a !== "Admin"){
+      return this.messageService.add({
+        severity: 'error',
+        summary: 'Erro ao adicionar Usuário',
+        detail: "Você não tem acesso a este recurso"
+      });
+    }
+
     this.NewUserDialog?.resetForm();
     this.saveMode = true;
     this.editMode = false
@@ -73,6 +83,16 @@ export class HomeComponent implements OnInit{
   }
 
   openEditUserDialog(user:UsuarioDTO){
+    const a = localStorage.getItem("NivelAcesso");
+
+    if(a !== "Admin"){
+      return this.messageService.add({
+        severity: 'error',
+        summary: 'Erro ao editar Usuário',
+        detail: "Você não tem acesso a este recurso"
+      });
+    }
+
     this.editMode = true;
     this.saveMode = false;
     this.userDialog = true;
@@ -81,6 +101,15 @@ export class HomeComponent implements OnInit{
 
   openDeletePopup(event:any, usuario:UsuarioDTO){
     const { id } = usuario
+    const a = localStorage.getItem("NivelAcesso")
+    if(a !== "Admin"){
+      return this.messageService.add({
+        severity: 'error',
+        summary: 'Erro ao excluir Usuário',
+        detail: "Você não tem acesso a este recurso"
+      });
+    }
+
     this.confirmationService.confirm({
       target: event.target as EventTarget,
       message: 'Deseja Deletar Este Usuário?',
@@ -105,5 +134,4 @@ export class HomeComponent implements OnInit{
   applyFilterGlobal($event: any, stringVal: any) {
     this.dt!.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
   }
-
 }

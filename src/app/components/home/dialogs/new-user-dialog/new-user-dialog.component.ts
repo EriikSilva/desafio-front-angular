@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { CrudService } from '../../crud-service.service';
 import { MessageService } from 'primeng/api';
 import { PostUserDTO, PutUserDTO } from '../../DTO/crudDTO';
+import { LoginService } from 'src/app/components/login/login.service';
 
 @Component({
   selector: 'app-new-user-dialog',
@@ -12,7 +13,7 @@ import { PostUserDTO, PutUserDTO } from '../../DTO/crudDTO';
 })
 export class NewUserDialogComponent implements OnInit{
 
-  constructor(private crudService:CrudService, private messageService:MessageService){}
+  constructor(private crudService:CrudService, private messageService:MessageService, private loginService:LoginService){}
 
   nivel_acesso?:any;
   slected_nivel_acesso:any;
@@ -111,6 +112,9 @@ export class NewUserDialogComponent implements OnInit{
     this.crudService.editUsuarios(body)
     .subscribe({
       next:(res:any) => {
+        if(nvl_acesso !== 'Admin'){
+          this.loginService.setNivelAcesso(nvl_acesso)
+        }
         const { mensagem } = res
         this.messageService.add({
           severity: 'success',
