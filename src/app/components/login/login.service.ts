@@ -54,7 +54,4 @@ export class LoginService {
     return localStorage.getItem("idUser")
   }
 
-
-  
-
 }

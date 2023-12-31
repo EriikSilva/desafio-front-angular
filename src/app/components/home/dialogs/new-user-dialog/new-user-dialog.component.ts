@@ -92,6 +92,7 @@ export class NewUserDialogComponent implements OnInit{
 
   editUser(){
     const nomeUsuario = this.loginService.getNome();
+    const idUsuario = this.loginService.getId();
 
     const formValue = this.userFormDialog.value;
     const nome = String(formValue.nome);
@@ -132,6 +133,10 @@ export class NewUserDialogComponent implements OnInit{
         this.getUsuarios.emit();
         this.userFormDialog.reset();
         this.closeDialog()
+
+        if(id == idUsuario){
+          location.reload();
+        }
       }, error:(res:any) => {
         console.log(res)
       }
