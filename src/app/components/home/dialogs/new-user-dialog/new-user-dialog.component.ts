@@ -18,6 +18,8 @@ export class NewUserDialogComponent implements OnInit{
   nivel_acesso?:any;
   slected_nivel_acesso:any;
   idUsuario: any;
+  onNvlAccess:any;
+  usuarioLogado:any;
 
   @Input() userDialog: boolean = false;
 
@@ -36,6 +38,8 @@ export class NewUserDialogComponent implements OnInit{
   })
   
   ngOnInit(): void {
+      this.getProps();
+
       this.nivel_acesso = [
         { 
           id:1,
@@ -102,6 +106,8 @@ export class NewUserDialogComponent implements OnInit{
     const a = Object(formValue.nivel_acesso)
     const { nvl_acesso } = a
     const id = this.idUsuario;
+
+    const validation = nvl_acesso == undefined ? "Usuario" : nvl_acesso;
     
     const body:PutUserDTO = {
       id,
@@ -109,14 +115,15 @@ export class NewUserDialogComponent implements OnInit{
       sobrenome,
       email,
       senha,
-      nivel_Acesso: nvl_acesso
+      nivel_Acesso: validation
     }
-
+    
     this.crudService.editUsuarios(body)
     .subscribe({
       next:(res:any) => {
-        if(nvl_acesso !== 'Admin'){
-          this.loginService.setNivelAcesso(nvl_acesso)
+
+        if(id == idUsuario){
+          this.loginService.setNivelAcesso(validation)
         }
 
         if(nome !== nomeUsuario){
@@ -150,6 +157,9 @@ export class NewUserDialogComponent implements OnInit{
   editUserDialog(user:any){
     const { nome, sobrenome, email, nivel_Acesso , senha , id} = user;
 
+    const idUsuario = localStorage.getItem("idUser");
+    const nvlAceso = localStorage.getItem("NivelAcesso");
+
     this.idUsuario = id
     this.userFormDialog.get('nome')?.setValue(nome);
     this.userFormDialog.get('sobrenome')?.setValue(sobrenome);
@@ -159,6 +169,15 @@ export class NewUserDialogComponent implements OnInit{
     this.slected_nivel_acesso = a
 
     this.userFormDialog.get('senha')?.setValue(senha);
+     
+    if(idUsuario == id && nvlAceso == "Admin"){
+      this.usuarioLogado = true;
+    }   
+  }
+
+  getProps(){
+    this.onNvlAccess = localStorage.getItem("NivelAcesso");
+    
   }
 
   resetForm(){

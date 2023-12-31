@@ -10,7 +10,7 @@
   <ng-template pTemplate="content">
     <form [formGroup]="userFormDialog">
 
-      <div class="field">
+      <div class="field"  *ngIf="usuarioLogado">
         <label for="nivel_acesso">Nível de Acesso:</label>
         <span> * </span>
         <p-dropdown
@@ -19,7 +19,6 @@
         formControlName="nivel_acesso"
         placeholder="Selecione"
         optionLabel="nvl_acesso"
-        (onChange)="onDropdownChangeUser($event)" 
         [(ngModel)]="slected_nivel_acesso"
         >
         </p-dropdown>
