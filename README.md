@@ -12,7 +12,7 @@
 - Front-end:angular com primeng e primeflex;
 - Backend => https://github.com/EriikSilva/desafio-back-indt
 
-### OBS: A Váriavel de ambiente ja está setada em https://localhost:7145/api (ASP.NET)
+### OBS: A Váriavel de ambiente ja está setada em https://localhost:7145/api (ASP.NET). Recomendado Limpar o LocalStorage em caso de erro
 
 # 🐱‍👤Features
 - Login
