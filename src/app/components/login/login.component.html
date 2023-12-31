@@ -25,6 +25,7 @@
                       [toggleMask]="true"
                       id="passwordInput"
                       [feedback]="false"
+                      [maxlength]="50"
                       formControlName="senha"
                     />
                     <label class="input" htmlFor="passwordInput">Senha: </label>
@@ -40,15 +41,28 @@
               </div>
             </form>
           </p-tabPanel>
-          <p-tabPanel header="Cadastro de Usuários">
+          <p-tabPanel header="Cadastrar-se">
+            <form [formGroup]="userFormDialog">
             <div class="flex align-items-center m-2">
               <div class="card_setup">
+                <p-dropdown
+                [style]="{ width: '100%' }"
+                id="nivel_acesso"
+                [options]="nivel_acesso"
+                formControlName="nivel_acesso"
+                placeholder="Selecione"
+                optionLabel="nvl_acesso"
+                [(ngModel)]="slected_nivel_acesso"
+                >
+                </p-dropdown>
+                <p-divider/>
                 <span class="p-float-label">
                   <input
                     [style]="{ width: '100%' }"
                     type="text"
                     pInputText
                     id="nameInput"
+                    formControlName="nome"
                     aria-describedby="username-help"
                   />
                   <label htmlFor="nameInput">Nome:</label>
@@ -61,6 +75,7 @@
                     pInputText
                     id="sobrenomeInput"
                     aria-describedby="username-help"
+                    formControlName="sobrenome"
                   />
                   <label htmlFor="sobrenomeInput">Sobrenome:</label>
                 </span>
@@ -71,6 +86,7 @@
                     pInputText
                     id="username"
                     id="emailInput"
+                    formControlName="email"
                     aria-describedby="email-help"
                   />
                   <label htmlFor="emailInput">Email:</label>
@@ -84,13 +100,15 @@
                     [toggleMask]="true"
                     id="passwordInput"
                     [feedback]="false"
+                    formControlName="senha"
                   />
                   <label htmlFor="passwordInput">Senha:</label>
                 </span>
                 <p-divider/>
-                <button label="Salvar" pButton class="botao_submit"></button>
+                <button (click)="saveUser()" label="Salvar" pButton class="botao_submit"></button>
               </div>
             </div>
+          </form>
           </p-tabPanel>
         </p-tabView>
       </div>
