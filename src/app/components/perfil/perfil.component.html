@@ -36,7 +36,7 @@
         </h3>
         <p-divider></p-divider>
         <h3>Nível de Acesso:
-            {{ nvlAcesso | titlecase }}
+            {{ nvlAcesso == "Admin" ? "Administrador" : "Usuário Comum" | titlecase }}
        </h3>
         <ng-template pTemplate="sub-header">
    
