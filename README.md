@@ -19,4 +19,5 @@
 - Toolbar (Navbar)
  -Logou  e Perfil
 - Login
-- Painel (CRUD de usuários) 
+- Painel (CRUD de usuários)
+- Perfil
