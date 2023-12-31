@@ -83,9 +83,11 @@ export class HomeComponent implements OnInit{
   }
 
   openEditUserDialog(user:UsuarioDTO){
+    const { id } = user;
     const a = localStorage.getItem("NivelAcesso");
+    const idUsuario = localStorage.getItem("idUser");
 
-    if(a !== "Admin"){
+    if(a == "Usuario" && String(id) !== idUsuario){
       return this.messageService.add({
         severity: 'error',
         summary: 'Erro ao editar Usuário',
@@ -103,7 +105,8 @@ export class HomeComponent implements OnInit{
     const { id } = usuario
     const a = localStorage.getItem("NivelAcesso");
     const idUsuario = localStorage.getItem("idUser");
-    if(a !== "Admin"){
+
+    if(a !== "Admin" ){
       return this.messageService.add({
         severity: 'error',
         summary: 'Erro ao excluir Usuário',
