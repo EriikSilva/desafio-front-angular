@@ -1,15 +1,15 @@
-# DesafioFrontIndt
+# Desafio Front
 
 # 💾 Instalação
 - Necessário Node e Angular
-- Clonar o projeto ```git clone https://github.com/EriikSilva/desafio-front-indt.git```
+- Clonar o projeto ```git clone https://github.com/EriikSilva/desafio-front-angular.git```
 - Rodar o comando pelo cmd na pasta do projeto ```npm install``` para instalar as depêndecias
 - Rodar o front com o comando no terminal ```ng serve``` e acessar ```http://localhost:4200``` :)
 
 # 💬 Sobre
 <b>Projeto com CRUD de usuários, painel e login</b> <br>
 <b>Front-end: Angular com primeng e primeflex</b> <br>
-**Backend => https://github.com/EriikSilva/desafio-back-indt**
+**Backend => https://github.com/EriikSilva/desafio-back-CSharp**
 
 ### OBS: A Váriavel de ambiente ja está setada em https://localhost:7145/api (ASP.NET). Recomendado Limpar o LocalStorage em caso de erro
 
