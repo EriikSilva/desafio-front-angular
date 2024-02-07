@@ -3,7 +3,7 @@ on: push
 
 
 jobs: 
-
+ 
   sonarqube:
     name: SonarQube Scan
     runs-on: ubuntu-latest
@@ -17,7 +17,7 @@ jobs:
        with: 
         node-version: 12
      - name: Install dependecies
-        run: yarn install
+        run: npm install
      
      - name: SonarQube Scan
        uses: sonarsouce/sonarqube-scan-action@master
