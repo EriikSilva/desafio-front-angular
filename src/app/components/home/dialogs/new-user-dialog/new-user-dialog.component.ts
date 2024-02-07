@@ -20,6 +20,7 @@ export class NewUserDialogComponent implements OnInit{
   idUsuario: any;
   onNvlAccess:any;
   usuarioLogado:any;
+  
 
   @Input() userDialog: boolean = false;
 
@@ -157,8 +158,6 @@ export class NewUserDialogComponent implements OnInit{
   editUserDialog(user:any){
     const { nome, sobrenome, email, nivel_Acesso , senha , id} = user;
 
-    const idUsuario = localStorage.getItem("idUser");
-    const nvlAceso = localStorage.getItem("NivelAcesso");
 
     this.idUsuario = id
     this.userFormDialog.get('nome')?.setValue(nome);
@@ -170,14 +169,19 @@ export class NewUserDialogComponent implements OnInit{
 
     this.userFormDialog.get('senha')?.setValue(senha);
      
-    if(idUsuario == id && nvlAceso == "Admin"){
-      this.usuarioLogado = true;
-    }   
+   
   }
 
   getProps(){
     this.onNvlAccess = localStorage.getItem("NivelAcesso");
-    
+
+    const idUsuario = localStorage.getItem("idUser");
+    const nvlAcesso = localStorage.getItem("NivelAcesso");
+
+
+    if(nvlAcesso == "Admin"){
+      this.usuarioLogado = true;
+    }       
   }
 
   resetForm(){
